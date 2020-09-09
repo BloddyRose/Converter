@@ -3,6 +3,7 @@
 ### Features 
 	-Convert mp4 to mp3 with ffmpeg
 	-Make folder to store output
+	-It is using ffmpeg exe so it is kind big
 
 #### Hint 
 	-Output files are stored in C:\ProgramFiles(86)\Converter\files

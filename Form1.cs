@@ -53,12 +53,13 @@ namespace Converter
                 string name = Path.GetFileNameWithoutExtension(file_path) + ".mp3";
                 MessageBox.Show("Done converting " + file_path + "\nNew File created " + name, "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 done.Value = done.Minimum;
+                label2.Show();
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            label2.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -129,12 +130,11 @@ namespace Converter
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Opening Browser to Converter Github Repository...", "Help", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            if (DialogResult == DialogResult.OK)
-            {
-                Process.Start("https://github.com/BloddyRose/Converter");
-            }
 
+            if (MessageBox.Show("Opening Browser to Converter Github Repository...", "Help", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                Process.Start("https://github.com/BloddyRose/Converter#hint");
+            }
         }
     }
 }
