@@ -14,23 +14,28 @@ namespace Converter
 
         private void convertButton_Click(object sender, EventArgs e)
         {
-            timer1.Start();
-            string file_path = fileInput.Text;
-            string name = Path.GetFileNameWithoutExtension(file_path);
-            string command = string.Format("/C ffmpeg.exe -i {0} {1}.mp3", file_path, name);
-            Process process = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo
+            try
             {
-                WindowStyle = ProcessWindowStyle.Hidden,
-                FileName = "cmd.exe",
-                Arguments = command
-            };
-            process.StartInfo = startInfo;
-            process.Start();
+                timer1.Interval = openFileDialog1.SafeFileName.Length;
+                timer1.Start();
+                string file_path = openFileDialog1.FileName;
+                string name = Path.GetFileNameWithoutExtension(file_path);
+                string command = string.Format("/C ffmpeg.exe -i {0} {1}.mp3", file_path, name);
+                Process process = new Process();
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    FileName = "cmd.exe",
+                    Arguments = command
+                };
+                process.StartInfo = startInfo;
+                process.Start();
+            }
+            catch (Exception ex)
+            {
 
-
-            
-
+                MessageBox.Show("Eror while converting file " + ex.Message, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void debugarea_TextChanged(object sender, EventArgs e)
@@ -71,24 +76,65 @@ namespace Converter
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            string files_folder = Directory.CreateDirectory("files").FullName;
-
-            string folder = Environment.CurrentDirectory;
-
-
-            string[] items = System.IO.Directory.GetFiles(folder, "*.mp3", System.IO.SearchOption.TopDirectoryOnly);
-            foreach (string filePath in items)
+            try
             {
-                string newFile = System.IO.Path.Combine(files_folder, System.IO.Path.GetFileName(filePath));
-                if (File.Exists(newFile))
-                {
-                    MessageBox.Show("File already exists!!\n Overwriting!", "Exists", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    // File.Delete(file);
-                    continue;
-                }
+                string files_folder = Directory.CreateDirectory("files").FullName;
 
-                File.Move(filePath, newFile);
+                string folder = Environment.CurrentDirectory;
+
+
+                string[] items = System.IO.Directory.GetFiles(folder, "*.mp3", System.IO.SearchOption.TopDirectoryOnly);
+                foreach (string filePath in items)
+                {
+                    string newFile = System.IO.Path.Combine(files_folder, System.IO.Path.GetFileName(filePath));
+                    if (File.Exists(newFile))
+                    {
+                        MessageBox.Show("File already exists!!\n Overwriting!", "Exists", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // File.Delete(file);
+                        File.Delete(filePath);
+                        continue;
+                    }
+
+                    File.Move(filePath, newFile);
+
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eror while moving files " + ex.Message, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                openFileDialog1.ShowDialog();
+                string path = openFileDialog1.FileName;
+                fileInput.Text = path;
+
+                if (DialogResult == DialogResult.Cancel)
+                {
+                    fileInput.Text = "Select a file ...";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Eror while opening file (File must be an mp4 file!!)" + ex.Message, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Opening Browser to Converter Github Repository...", "Help", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (DialogResult == DialogResult.OK)
+            {
+                Process.Start("https://github.com/BloddyRose/Converter");
+            }
+
         }
     }
 }
