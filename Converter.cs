@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+* Build and design by BloddyRose
+* This software is free to use
+* Version 2.0
+*/
+#region Main
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -12,7 +18,7 @@ namespace Converter
             InitializeComponent();
 
         }
-
+        #region Convert Function
         private void convertButton_Click(object sender, EventArgs e)
         {
             try
@@ -38,12 +44,8 @@ namespace Converter
                 MessageBox.Show("Eror while converting file " + ex.Message, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void debugarea_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        #endregion
+        #region Timer
         private void timer1_Tick(object sender, EventArgs e)
         {
             done.Increment(1);
@@ -57,17 +59,8 @@ namespace Converter
                 label2.Show();
             }
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        #endregion
+        #region Dispose Resources
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             foreach (Process processs in Process.GetProcessesByName("ffmpeg.exe"))
@@ -83,8 +76,42 @@ namespace Converter
             Application.Exit();
             Dispose();
         }
+        #endregion
+        #region Open File Dialog
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                openFileDialog1.ShowDialog();
+                string path = openFileDialog1.FileName;
+                fileInput.Text = path;
+
+                if (DialogResult == DialogResult.Cancel)
+                {
+                    fileInput.Text = "Select a file ...";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Eror while opening file (File must be an mp4 file!!)" + ex.Message, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        #endregion
+        #region Open Git Page
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            if (MessageBox.Show("Opening Browser to Converter Github Repository...", "Help", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                Process.Start("https://github.com/BloddyRose/Converter#hint");
+            }
+        }
+        #endregion
+        #region Open Folder
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
             {
@@ -108,52 +135,20 @@ namespace Converter
                     File.Move(filePath, newFile);
 
                 }
+
+                string path = Directory.GetCurrentDirectory();
+                string folder1 = "files";
+                string full_path = Path.Combine(path, folder1);
+
+                Process.Start("explorer.exe", full_path);
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Eror while moving files " + ex.Message, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                openFileDialog1.ShowDialog();
-                string path = openFileDialog1.FileName;
-                fileInput.Text = path;
-
-                if (DialogResult == DialogResult.Cancel)
-                {
-                    fileInput.Text = "Select a file ...";
-                }
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show("Eror while opening file (File must be an mp4 file!!)" + ex.Message, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-            if (MessageBox.Show("Opening Browser to Converter Github Repository...", "Help", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-            {
-                Process.Start("https://github.com/BloddyRose/Converter#hint");
-            }
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-            string path = Directory.GetCurrentDirectory();
-            string folder = "files";
-            string full_path = Path.Combine(path, folder);
-
-            Process.Start("explorer.exe", full_path);
-        }
+    #endregion
     }
 }
+#endregion

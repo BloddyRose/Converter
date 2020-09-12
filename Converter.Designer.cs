@@ -35,7 +35,6 @@
             this.convertButton = new System.Windows.Forms.Button();
             this.done = new System.Windows.Forms.ProgressBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -68,7 +67,7 @@
             this.convertButton.BackColor = System.Drawing.Color.SeaGreen;
             this.convertButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.convertButton.Font = new System.Drawing.Font("MV Boli", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.convertButton.Location = new System.Drawing.Point(347, 43);
+            this.convertButton.Location = new System.Drawing.Point(347, 29);
             this.convertButton.Name = "convertButton";
             this.convertButton.Size = new System.Drawing.Size(71, 34);
             this.convertButton.TabIndex = 2;
@@ -86,19 +85,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.SeaGreen;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("MV Boli", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(347, 10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 25);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Move";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // openFileDialog1
             // 
@@ -169,7 +155,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.done);
             this.Controls.Add(this.convertButton);
             this.Controls.Add(this.label1);
@@ -181,7 +166,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " Converter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,7 +178,6 @@
         private System.Windows.Forms.Button convertButton;
         private System.Windows.Forms.ProgressBar done;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
