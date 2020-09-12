@@ -5,11 +5,12 @@ using System.Windows.Forms;
 
 namespace Converter
 {
-    public partial class Form1 : Form
+    public partial class Converter : Form
     {
-        public Form1()
+        public Converter()
         {
             InitializeComponent();
+
         }
 
         private void convertButton_Click(object sender, EventArgs e)
@@ -59,7 +60,7 @@ namespace Converter
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label2.Hide();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -73,6 +74,13 @@ namespace Converter
             {
                 processs.Kill();
             }
+            foreach (Process processs in Process.GetProcessesByName("Converter.exe"))
+            {
+                processs.Kill();
+
+            }
+            Environment.Exit(0);
+            Application.Exit();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -135,6 +143,16 @@ namespace Converter
             {
                 Process.Start("https://github.com/BloddyRose/Converter#hint");
             }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            string path = Directory.GetCurrentDirectory();
+            string folder = "files";
+            string full_path = Path.Combine(path, folder);
+
+            Process.Start("explorer.exe", full_path);
         }
     }
 }
