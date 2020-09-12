@@ -81,6 +81,7 @@ namespace Converter
             }
             Environment.Exit(0);
             Application.Exit();
+            Dispose();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
