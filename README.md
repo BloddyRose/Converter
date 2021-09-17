@@ -6,7 +6,7 @@
 	-It is using ffmpeg exe so it is kind big
 
 #### Hint 
-	-Output files are stored in C:\ProgramFiles(86)\Converter\files
+	-Output files are stored in C:\Program Files (x86)\BloddyRose\Converter
 	-Still Beta version 
 #### How to use
 	-First use open button to select a file
